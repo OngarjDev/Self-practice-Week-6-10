@@ -22,7 +22,7 @@ function deleteQuote(id) {
   // TODO: Remove the quote object from the array using the given id
   for (let x = 0;x < quotes.length;x++){
     if(quotes[x].id === id){
-      delete quotes[x];
+      quotes.splice(x,1)
       return "Delete Success"
     }
   }
