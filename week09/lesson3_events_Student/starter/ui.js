@@ -6,65 +6,43 @@ const quoteList = document.getElementById("quote-list")
 const form = document.getElementById("quoteForm")
 const contentInput = document.getElementById("content")
 const authorInput = document.getElementById("author")
-const deleteBtn = document.getElementsByClassName("delete-btn")
-const editBtn = document.getElementsByClassName("edit-btn")
 const idInput = document.getElementById("quoteId")
 const randomBtn = document.getElementById("randomBtn")
 const randomDisplay = document.getElementById("randomQuoteDisplay")
 
 function createQuoteElement(quote) {
-  quoteList.innerHTML += `
+  return `
     <div data-id="${quote.id}">
       <p>${quote.content}</p>
       <p>${quote.author}</p>
-      <button class="edit-btn" data-id="${quote.id}">
-        Edit
-      </button>
-      <button class="delete-btn" data-id="${quote.id}">
-        Delete
-      </button>
+      <button class="edit-btn" data-id="${quote.id}">Edit</button>
+      <button class="delete-btn" data-id="${quote.id}">Delete</button>
     </div>
-  `
+  `;
 }
 
 // Add, edit, delete quote functions
 
 function addQuoteToDOM(quote) {
-  quoteForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    createQuoteElement(addQuote(contentInput.value, authorInput.value))
-  })
+  quoteList.innerHTML += createQuoteElement(quote);
 }
-function updateQuoteInDOM(quote) {
-  quoteList.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete-btn')) {
-      const id = Number(e.target.getAttribute('data-id'));
-      deleteQuote(id);
-      renderQuotes();
+quoteList.addEventListener('click', function (e) {
+  if (e.target.classList.contains('delete-btn')) {
+    const id = Number(e.target.getAttribute('data-id'));
+    deleteQuote(id);
+    renderQuotes();
+  }
+  if (e.target.classList.contains('edit-btn')) {
+    const id = Number(e.target.getAttribute('data-id'));
+    const allQuotes = getAllQuotes();
+    const quote = allQuotes.find(q => q.id === id);
+    if (quote) {
+      idInput.value = quote.id;
+      contentInput.value = quote.content;
+      authorInput.value = quote.author;
     }
-  })
-}
-function deleteQuoteFromDOM(id) {
-  quoteList.addEventListener('click',(e) => {
-    console.log("Test")
-    console.log(e)
-    if (e.target.classList.contains('delete-btn')) {
-      const id = Number(e.target.getAttribute('data-id'));
-      deleteQuote(id);
-      renderQuotes();
-    }
-    if (e.target.classList.contains('edit-btn')) {
-      const id = Number(e.target.getAttribute('data-id'));
-      const allQuotes = getAllQuotes();
-      const quote = allQuotes.find(q => q.id === id);
-      if (quote) {
-        idInput.value = quote.id;
-        contentInput.value = quote.content;
-        authorInput.value = quote.author;
-      }
-    }
-  });
-}
+  }
+});
 function renderQuotes() {
   quoteList.innerHTML = "";
   const allQuotes = getAllQuotes();
@@ -73,10 +51,9 @@ function renderQuotes() {
   });
 }
 function showRandomQuote() {
-
   randomBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const allQuotes = getAllQuotes(); // ประกาศตัวแปรตรงนี้
+    const allQuotes = getAllQuotes();
     const randomIndex = Math.floor(Math.random() * allQuotes.length);
     const quote = allQuotes[randomIndex];
 
@@ -98,8 +75,16 @@ function showRandomQuote() {
 }
 // Event listeners for form submission, edit, and delete clicks
 
-
-addQuoteToDOM()
-updateQuoteInDOM()
-renderQuotes()
-showRandomQuote()
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const id = Number(idInput.value);
+  if (id) {
+    updateQuote(id, contentInput.value, authorInput.value);
+  } else {
+    addQuote(contentInput.value, authorInput.value);
+  }
+  form.reset();
+  idInput.value = "";
+  renderQuotes();
+});
+showRandomQuote();
