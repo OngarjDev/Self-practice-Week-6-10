@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>// Store data
+ localStorage.setItem('username', 'JohnDoe');
+localStorage.setItem('theme', 'dark');
+let username = localStorage.getItem('username');
+let theme = localStorage.getItem('theme');
+localStorage.clear();
+
+sessionStorage.setItem('sessionToken', 'xyz123abc');
+let token = sessionStorage.getItem('sessionToken');
+sessionStorage.clear();
+
+document.cookie = "user=JaneDoe; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/";
+let allCookies = document.cookie;/// มันจะได้ Cookie ทั้งหมด แต่ต้องแยกมาทีละตัว
+document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    </script>
+</body>
+
+</html>
