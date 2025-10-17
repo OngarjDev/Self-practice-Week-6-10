@@ -1,0 +1,6 @@
+บทนี้ผมได้เรียนเกี่ยวกับ การเก็บข้อมูล Storage 
+Session 
+Cookie
+LocalStorage
+ซึ่งผมได้ลองใช้แล้วพบว่า Session ปิดBrowser แล้วหายเลย
+LocalStorage เท่าที่ผมศึกษามาคือ ไม่มีวันหมดอายุต้องลบโดย Code หรือ Browser สั่งลบเอง

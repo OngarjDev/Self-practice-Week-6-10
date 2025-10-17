@@ -1,1 +1,2 @@
 ใน Module 2 นี้ได้เรียนรู้เกี่ยวกับ DOM Event Leetcode โปรเจกต์ Self-Practice 
+ได้เรียน Storage ต่างๆ ซึ่งใน Repo นี้จะรวมวิธีทำ เหมือน Note เอาไว้อ่านทดลองทำอะไรแปลกในแต่ละ Week
