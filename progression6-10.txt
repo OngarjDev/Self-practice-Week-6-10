@@ -1,2 +1,13 @@
 ใน Module 2 นี้ได้เรียนรู้เกี่ยวกับ DOM Event Leetcode โปรเจกต์ Self-Practice 
 ได้เรียน Storage ต่างๆ ซึ่งใน Repo นี้จะรวมวิธีทำ เหมือน Note เอาไว้อ่านทดลองทำอะไรแปลกในแต่ละ Week
+
+ผมได้ลองรวมสิ่งที่เรียนรู้มาจากวิชา Frontend ใส่ใน Week10 ชื่อว่า ProjectBookmark.html ซึ่งผมเขียน Frontend ให้เชื่อมกับ Backend ได้จริง พร้อมทั้ง Deploy
+ขึ้น Server Docker ด้วย ผมได้เรียนรู้หลายอย่างเช่น BASEURL การ fetch api การเขียน async await การทำ Error Handering เพื่อรับมือกับ status ที่ backendส่งมา
+ซึ่งผมได้เข้าใจแล้วว่า e.preventDefault ทำไมอาจารย์ถึงให้ใช้ เพราะ ถ้าไม่ใช้มันจะพาเรา Redirect ไปเจอ url ที่มี json ทำให้ ต้องใช้ backend Redirect
+กลับมาโดยไม่จำเป็น พอรู้จัก e.preventDefault() ทำให้สะดวกขึ้นเยอะเลย 
+dom ก็มีประโยชน์เมื่อได้ใช้ กับ Backend ด้วย เพราะ มันช่วยเข้าถึง section , input ต่างๆได้ เวลาต้องการจะส่ง value เราก็ใช้ความรู้ Dom ส่งข้อมูลไปหา Backend
+หรือ ต้องการแสดงผลอะไรที่เป็น LIST html
+
+ส่วนใน Week6 กับ Week7 ผมได้เรียนรู้เรื่อง Dom และ ได้ฝึก leetcode Nodelist พอดีทำให้เข้าใจการสร้าง Element แต่ละครั้งเราจะสร้าง 
+element ใหม่ มันจะไม่เชื่อมกับอะไรเลย
+หลังจากนั้น สมมุติเป็น section.appendChild(element ใหม่) มันก็จะเป็นลูกของ section ทันที ซึ่งเหมือน Concept Nodelist เลยที่มี [Address,Data] ใน 1 Node แล้วมันก็ต่อๆกันไปเรื่อยๆ

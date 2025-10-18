@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title>Welcome To Bookmark</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+<h1>BookMark Hub</h1>
+<p>Welcome to Express</p>
+<section id="allbookmarks"></section>
+
+<form id="bookmarkForm" method="POST" style="display: grid;width: 50%;align-items: center;">
+    <input type="hidden" name="id" id="id">
+    <label for="title">title</label>
+    <input type="text" name="title" id="title"><br>
+    <label for="website">website</label><br>
+    <input type="url" name="url" id="website"><br>
+    <input type="submit" name="btn_addbookmark" id="btn_addbookmark" value="Add Bookmark"
+           style="background-color: lightskyblue;height: 30px">
+    <input type="button" onclick="cancelUpdateBookmark()" name="btn_cancel" id="btn_cancel" value="Cancel Update"
+           style="background-color: gray;height: 30px" hidden>
+</form>
+
+<script>
+    loadBookmark();
+
+    async function loadBookmark() {
+        const allbookmarks = await fetch('http://localhost:3000/Bookmark/api/Allbookmarks');
+        const bookmarks = await allbookmarks.json();
+
+        let section = document.getElementById('allbookmarks');
+        section.innerHTML = '';
+
+        bookmarks.forEach(bookmark => {
+            let li = document.createElement('li');
+            li.innerHTML = `
+                ชื่อBookmark: ${bookmark.title} ; url: ${bookmark.url} ; createDate: ${bookmark.createdAt}
+                <a href="#" onclick="editBookmark(${bookmark.id})">UpdateBookmark</a>
+                <a href="#" onclick="deleteBookmark(${bookmark.id})" style="color:red;">DeleteBookmark</a>
+            `;
+            section.appendChild(li);
+        });
+    }
+
+    async function deleteBookmark(id) {
+        await fetch(`http://localhost:3000/Bookmark/api/bookmarks/${id}`, {method: 'DELETE'});
+        loadBookmark();
+    }
+
+    function cancelUpdateBookmark() {
+        document.getElementById("btn_addbookmark").hidden = false;
+        document.getElementById("btn_cancel").hidden = true;
+        document.getElementById("id").value = '';
+        document.getElementById("title").value = '';
+        document.getElementById("website").value = '';
+    }
+
+    async function editBookmark(id) {
+        const res = await fetch(`http://localhost:3000/Bookmark/api/bookmarks/${id}`);
+        const item = await res.json();
+
+        document.getElementById("id").value = item.id;
+        document.getElementById("title").value = item.title;
+        document.getElementById("website").value = item.url;
+
+        document.getElementById("btn_addbookmark").hidden = true;
+        document.getElementById("btn_cancel").hidden = false;
+    }
+
+    document.getElementById('bookmarkForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const id = document.getElementById('id').value;
+        const url = id
+            ? `http://localhost:3000/Bookmark/api/bookmarks/${id}?_method=PUT`
+            : `http://localhost:3000/Bookmark/api/bookmarks`;
+        await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                title: document.getElementById('title').value,
+                url: document.getElementById('website').value
+            })
+        });
+        location.reload();
+        cancelUpdateBookmark();
+    });
+</script>
+</body>
+</html>

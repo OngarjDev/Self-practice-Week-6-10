@@ -4,3 +4,11 @@ Cookie
 LocalStorage
 ซึ่งผมได้ลองใช้แล้วพบว่า Session ปิดBrowser แล้วหายเลย
 LocalStorage เท่าที่ผมศึกษามาคือ ไม่มีวันหมดอายุต้องลบโดย Code หรือ Browser สั่งลบเอง
+
+ProjecBookmark.html 
+คือ Project เกี่ยวกับ Bookmark website CRUD ทำฝึกทำก่อนสอบทุกวิชา เพราะผมอยากเข้าใจว่า Frontend จะเชื่อมกับ Backend ได้อย่างไรหากไม่มี Framework
+ซึ่งสิ่งสำคัญ คือ Fetch API ผมได้รู้ว่ามันใส่ Method ได้ด้วย การเขียน Base_URL ค่อนข้าง HARDCODE ทำให้ตอนที่ผมจะลอง Deploy ขึ้น DOCKER เจอปัญหา
+Frontend หา API ไม่เจอ เพราะผมปรับเป็น Localhost หมดเลย ซึ่งทำให้ผมได้เรียนรู้ว่าในครั้งต่อไปต้องสร้างตัวแปร BASEURL ไว้เปลี่ยน ระหว่าง DEV กับ Production
+ปัญหาต่อมาคือ การส่ง query-param กับ route-param ไม่เหมือนกัน 
+ตอนแรกผมส่ง localhost:3000/Bookmark/api/bookmark?id=5 หาไม่เจอเพราะ ผมเขียนBackend ให้รับ route-param ซึ่งต้องเขียนในรูปแบบนี้
+localhost:3000/Bookmark/api/bookmark/5 ถึงจะสามารถ GET ได้ 
