@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quote Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Quote Manager</h1>
+  
+  <section id="quote-list"></section>
+
+  <hr>
+
+  <h2>Add / Edit Quote</h2>
+  <form id="quoteForm">
+    <input type="hidden" id="quoteId">
+    <input type="text" id="content" placeholder="Enter quote" required>
+    <input type="text" id="author" placeholder="Enter author" required>
+    <button type="submit">Save</button>
+  </form>
+
+  <script type="module" src="ui.js"></script>
+</body>
+</html>
